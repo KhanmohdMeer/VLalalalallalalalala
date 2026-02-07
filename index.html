@@ -8,7 +8,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- CSS (MUST be in head) -->
+  <!-- CSS -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/valentine.css">
 </head>
@@ -16,15 +16,14 @@
 <body class="locked">
 
   <!-- 🔒 LOCK SCREEN -->
-  <div class="lock-screen" id="lockScreen">
-    <h1>Not yet, Sunshine 💖🌹</h1>
+  <div id="lockScreen" class="lock-screen">
+    <h1>Not yet, Sunshine 💖</h1>
     <p>Something special is waiting</p>
-    <div class="countdown-container">
-      <p id="countdown"></p></div>
+    <div id="countdown"></div>
   </div>
 
   <!-- ❤️ CONTENT -->
-  <div class="container">
+  <div id="mainContent" class="container">
     <h1>Hey… I wanted to tell you something 🌹</h1>
 
     <p class="message" id="typeMessage">
@@ -39,9 +38,8 @@
       I’ll respect it — completely.
     </p>
 
-    <!-- 🎞️ GIF -->
     <div class="gif-box" id="gifBox">
-      <img src="assets/start.gif" alt="A little something 🤍">
+      <img src="assets/start.gif" alt="🤍">
     </div>
 
     <div class="buttons">
@@ -52,8 +50,7 @@
     <p class="response" id="responseText"></p>
   </div>
 
-  <!-- JS (ONLY external scripts) -->
-  <script src="js/script.js"></script>
-  <script src="js/heart.js"></script>
+  <!-- JS -->
+  <script src="js/script.js?v=FINAL"></script>
 </body>
 </html>

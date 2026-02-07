@@ -13,11 +13,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Prevent content leak while locked */
-body.locked .container {
-  visibility: hidden;
-}
-
 /* ===============================
    TYPOGRAPHY
 ================================ */

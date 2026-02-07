@@ -1,38 +1,47 @@
-// 🔑 DEV OVERRIDE (use ?dev in URL)
+// ===============================
+// DEV OVERRIDE (?dev)
+// ===============================
 const DEV_OVERRIDE = new URLSearchParams(window.location.search).has("dev");
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===============================
-     CONFIG
-  ================================ */
-  const TEST_MODE = false; // 🔴 keep FALSE for final send
+  // ===============================
+  // CONFIG
+  // ===============================
+  const UNLOCK_DATE = {
+    year: 2026,
+    month: 1, // February (0 = Jan)
+    day: 14
+  };
 
-  /* ===============================
-     DOM
-  ================================ */
+  // ===============================
+  // DOM
+  // ===============================
   const lockScreen = document.getElementById("lockScreen");
   const countdown  = document.getElementById("countdown");
+  const main       = document.getElementById("mainContent");
   const msgEl      = document.getElementById("typeMessage");
   const gifBox     = document.getElementById("gifBox");
   const responseEl = document.getElementById("responseText");
 
-  if (!msgEl) return;
+  // ===============================
+  // INITIAL STATE (HARD SAFE)
+  // ===============================
+  main.style.display = "none";
 
-  /* ===============================
-     TYPEWRITER SETUP
-  ================================ */
-  const fullHTML = msgEl.innerHTML; // capture once
+  const fullHTML = msgEl.innerHTML;
   msgEl.innerHTML = "";
 
   let typingStarted = false;
 
+  // ===============================
+  // TYPEWRITER
+  // ===============================
   function startTyping() {
     if (typingStarted) return;
     typingStarted = true;
 
     let i = 0;
-
     function type() {
       if (i < fullHTML.length) {
         if (fullHTML[i] === "<") {
@@ -44,58 +53,65 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         setTimeout(type, 28);
       } else {
-        if (gifBox) gifBox.classList.add("show");
+        gifBox.classList.add("show");
       }
     }
-
     type();
   }
 
-  /* ===============================
-     UNLOCK HANDLER
-  ================================ */
+  // ===============================
+  // UNLOCK
+  // ===============================
   function unlock() {
-    if (lockScreen) lockScreen.style.display = "none";
+    lockScreen.style.display = "none";
     document.body.classList.remove("locked");
+    main.style.display = "block";
     startTyping();
   }
 
-  /* ===============================
-     DEV / TEST OVERRIDE
-  ================================ */
-  if (TEST_MODE || DEV_OVERRIDE) {
+  // ===============================
+  // DEV OVERRIDE (ALWAYS WINS)
+  // ===============================
+  if (DEV_OVERRIDE) {
     unlock();
     return;
   }
 
-  /* ===============================
-     DATE LOCK (14 FEB)
-  ================================ */
-  const unlockTime = new Date("2026-02-14T00:00:00").getTime();
+  // ===============================
+  // DATE LOGIC (TIMEZONE SAFE)
+  // ===============================
+  function todayDate() {
+    const n = new Date();
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+  }
+
+  const unlockDate = new Date(
+    UNLOCK_DATE.year,
+    UNLOCK_DATE.month,
+    UNLOCK_DATE.day
+  );
 
   function updateLock() {
-    const now = Date.now();
-    const diff = unlockTime - now;
+    const today = todayDate();
 
-    if (diff <= 0) {
+    if (today >= unlockDate) {
       unlock();
       return;
     }
 
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
+    const diffDays = Math.ceil(
+      (unlockDate - today) / 86400000
+    );
 
-    if (countdown) {
-      countdown.textContent = `${h}h ${m}m`;
-    }
+    countdown.textContent = `${diffDays} day(s) to go 🤍`;
   }
 
   setInterval(updateLock, 1000);
   updateLock();
 
-  /* ===============================
-     NO BUTTON LOGIC
-  ================================ */
+  // ===============================
+  // NO BUTTON
+  // ===============================
   const noMsgs = [
     "That’s completely okay 🤍",
     "Take your time.",
@@ -107,19 +123,18 @@ document.addEventListener("DOMContentLoaded", () => {
   let noIndex = 0;
 
   window.handleNo = function () {
-    if (responseEl && noIndex < noMsgs.length) {
-      responseEl.textContent = noMsgs[noIndex];
+    if (noIndex < noMsgs.length) {
+      responseEl.textContent = noMsgs[noIndex++];
     }
-    noIndex++;
 
     if (noIndex >= noMsgs.length) {
       window.location.href = "html/no.html";
     }
   };
 
-  /* ===============================
-     YES BUTTON
-  ================================ */
+  // ===============================
+  // YES BUTTON
+  // ===============================
   window.goYes = function () {
     window.location.href = "html/yes.html";
   };

@@ -24,6 +24,7 @@ body {
 #countdown {
   margin-top: 16px;
   font-size: 1.1rem;
+  opacity: 0.85;
 }
 
 /* ===============================
@@ -82,12 +83,4 @@ button {
 .response {
   margin-top: 18px;
   font-style: italic;
-}
-.countdown-container {
-  margin-top: 14px;
-}
-
-#countdown {
-  font-size: 1.1rem;
-  opacity: 0.85;
 }
