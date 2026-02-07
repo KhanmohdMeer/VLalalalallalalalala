@@ -5,18 +5,18 @@ const DEV_OVERRIDE = new URLSearchParams(window.location.search).has("dev");
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===============================
-  // CONFIG
-  // ===============================
+  /* ===============================
+     CONFIG
+  ================================ */
   const UNLOCK_DATE = {
     year: 2026,
     month: 1, // February (0 = Jan)
     day: 14
   };
 
-  // ===============================
-  // DOM
-  // ===============================
+  /* ===============================
+     DOM
+  ================================ */
   const lockScreen = document.getElementById("lockScreen");
   const countdown  = document.getElementById("countdown");
   const main       = document.getElementById("mainContent");
@@ -24,19 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const gifBox     = document.getElementById("gifBox");
   const responseEl = document.getElementById("responseText");
 
-  // ===============================
-  // INITIAL STATE (HARD SAFE)
-  // ===============================
+  // HARD SAFE STATE
   main.style.display = "none";
 
+  /* ===============================
+     TYPEWRITER SETUP
+  ================================ */
   const fullHTML = msgEl.innerHTML;
   msgEl.innerHTML = "";
-
   let typingStarted = false;
 
-  // ===============================
-  // TYPEWRITER
-  // ===============================
   function startTyping() {
     if (typingStarted) return;
     typingStarted = true;
@@ -59,9 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
     type();
   }
 
-  // ===============================
-  // UNLOCK
-  // ===============================
+  /* ===============================
+     UNLOCK
+  ================================ */
   function unlock() {
     lockScreen.style.display = "none";
     document.body.classList.remove("locked");
@@ -69,17 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
     startTyping();
   }
 
-  // ===============================
-  // DEV OVERRIDE (ALWAYS WINS)
-  // ===============================
+  /* ===============================
+     DEV OVERRIDE
+  ================================ */
   if (DEV_OVERRIDE) {
     unlock();
     return;
   }
 
-  // ===============================
-  // DATE LOGIC (TIMEZONE SAFE)
-  // ===============================
+  /* ===============================
+     DATE LOCK (SAFE)
+  ================================ */
   function todayDate() {
     const n = new Date();
     return new Date(n.getFullYear(), n.getMonth(), n.getDate());
@@ -109,9 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateLock, 1000);
   updateLock();
 
-  // ===============================
-  // NO BUTTON
-  // ===============================
+  /* ===============================
+     NO BUTTON (GLOBAL)
+  ================================ */
   const noMsgs = [
     "That’s completely okay 🤍",
     "Take your time.",
@@ -132,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // ===============================
-  // YES BUTTON
-  // ===============================
+  /* ===============================
+     YES BUTTON (GLOBAL)
+  ================================ */
   window.goYes = function () {
     window.location.href = "html/yes.html";
   };
