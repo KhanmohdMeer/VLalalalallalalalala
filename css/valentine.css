@@ -1,0 +1,93 @@
+/* ===============================
+   PAGE BACKGROUND
+================================ */
+body {
+  background: linear-gradient(135deg, #ffb6c1, #f07be0);
+  color: #4a0033;
+}
+
+/* ===============================
+   LOCK SCREEN
+================================ */
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ffb6c1, #f07be0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  text-align: center;
+}
+
+#countdown {
+  margin-top: 16px;
+  font-size: 1.1rem;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px 120px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===============================
+   MESSAGE
+================================ */
+.message {
+  font-size: 1.1rem;
+  min-height: 200px;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.buttons {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 12px 22px;
+  border-radius: 28px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.yes {
+  background: #d32f2f;
+  color: white;
+}
+
+.no {
+  background: transparent;
+  border: 1px solid #6b003a;
+  color: #6b003a;
+}
+
+/* ===============================
+   RESPONSE TEXT
+================================ */
+.response {
+  margin-top: 18px;
+  font-style: italic;
+}
+.countdown-container {
+  margin-top: 14px;
+}
+
+#countdown {
+  font-size: 1.1rem;
+  opacity: 0.85;
+}

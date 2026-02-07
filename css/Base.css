@@ -1,0 +1,73 @@
+/* ===============================
+   RESET & GLOBALS
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Prevent content leak while locked */
+body.locked .container {
+  visibility: hidden;
+}
+
+/* ===============================
+   TYPOGRAPHY
+================================ */
+h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+p {
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* ===============================
+   HEARTS (GLOBAL)
+================================ */
+.heart {
+  position: fixed;
+  top: -30px;
+  pointer-events: none;
+  z-index: 0;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* ===============================
+   GIF BOX (GLOBAL)
+================================ */
+.gif-box {
+  margin: 24px auto;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gif-box.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gif-box img {
+  width: 160px;
+  max-width: 70vw;
+  border-radius: 14px;
+  pointer-events: none;
+}
