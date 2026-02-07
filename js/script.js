@@ -1,8 +1,13 @@
+// ===============================
+// DEV OVERRIDE (?dev)
+// ===============================
 const DEV_OVERRIDE = new URLSearchParams(window.location.search).has("dev");
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("JS LOADED");
 
+  /* ===============================
+     DOM
+  ================================ */
   const lockScreen = document.getElementById("lockScreen");
   const main       = document.getElementById("mainContent");
   const msgEl      = document.getElementById("typeMessage");
@@ -12,17 +17,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const yesBtn = document.getElementById("yesBtn");
   const noBtn  = document.getElementById("noBtn");
 
-  console.log("yesBtn:", yesBtn);
-  console.log("noBtn:", noBtn);
+  // Safety
+  if (!msgEl || !yesBtn || !noBtn) return;
 
-  // 🔴 IF THESE ARE NULL → HTML IS WRONG
-
+  // Hide content until unlock
   main.style.display = "none";
 
+  /* ===============================
+     TYPEWRITER
+  ================================ */
   const fullHTML = msgEl.innerHTML;
   msgEl.innerHTML = "";
 
+  let typingStarted = false;
+
   function startTyping() {
+    if (typingStarted) return;
+    typingStarted = true;
+
     let i = 0;
     function type() {
       if (i < fullHTML.length) {
@@ -35,35 +47,62 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         setTimeout(type, 28);
       } else {
+        // ✅ show gif and KEEP it visible
         gifBox.classList.add("show");
+        gifBox.style.pointerEvents = "none";
       }
     }
     type();
   }
 
+  /* ===============================
+     UNLOCK
+  ================================ */
   function unlock() {
-    console.log("UNLOCK CALLED");
     lockScreen.style.display = "none";
+    document.body.classList.remove("locked");
     main.style.display = "block";
     startTyping();
   }
 
-  // 🔓 DEV OVERRIDE
+  // 🔓 DEV OVERRIDE (for testing)
   if (DEV_OVERRIDE) {
     unlock();
+  } else {
+    // Normal lock (date logic already tested earlier)
+    // Keep locked unless date condition met
+    // If today >= unlock date → call unlock()
+    // (Your existing date logic can stay here)
   }
 
-  // ✅ BUTTON EVENTS (GUARANTEED)
+  /* ===============================
+     NO BUTTON (5-STEP FLOW)
+  ================================ */
+  const noMsgs = [
+    "That’s completely okay 🤍",
+    "Take your time.",
+    "You don’t owe me anything.",
+    "I respect how you feel.",
+    "Thank you for being honest."
+  ];
+
+  let noIndex = 0;
+
+  noBtn.addEventListener("click", () => {
+    if (noIndex < noMsgs.length) {
+      responseEl.textContent = noMsgs[noIndex++];
+      return;
+    }
+
+    // After all messages shown
+    window.location.href = "html/no.html";
+  });
+
+  /* ===============================
+     YES BUTTON
+  ================================ */
   yesBtn.addEventListener("click", () => {
-    console.log("YES CLICKED");
     window.location.href = "html/yes.html";
   });
 
-  noBtn.addEventListener("click", () => {
-    console.log("NO CLICKED");
-    responseEl.textContent = "That’s completely okay 🤍";
-    setTimeout(() => {
-      window.location.href = "html/no.html";
-    }, 800);
-  });
 });
