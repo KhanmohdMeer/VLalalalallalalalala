@@ -17,10 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const yesBtn = document.getElementById("yesBtn");
   const noBtn  = document.getElementById("noBtn");
 
-  // Safety
   if (!msgEl || !yesBtn || !noBtn) return;
 
-  // Hide content until unlock
+  // HARD SAFE STATE
   main.style.display = "none";
 
   /* ===============================
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         setTimeout(type, 28);
       } else {
-        // ✅ show gif and KEEP it visible
         gifBox.classList.add("show");
         gifBox.style.pointerEvents = "none";
       }
@@ -56,27 +54,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     UNLOCK
+     UNLOCK (CRITICAL FIX)
   ================================ */
   function unlock() {
+    // 🔴 COMPLETELY DISABLE LOCK SCREEN
     lockScreen.style.display = "none";
+    lockScreen.style.pointerEvents = "none";
+
     document.body.classList.remove("locked");
     main.style.display = "block";
+
     startTyping();
   }
 
-  // 🔓 DEV OVERRIDE (for testing)
+  // 🔓 DEV OVERRIDE
   if (DEV_OVERRIDE) {
     unlock();
-  } else {
-    // Normal lock (date logic already tested earlier)
-    // Keep locked unless date condition met
-    // If today >= unlock date → call unlock()
-    // (Your existing date logic can stay here)
   }
 
   /* ===============================
-     NO BUTTON (5-STEP FLOW)
+     NO BUTTON (5 STEPS)
   ================================ */
   const noMsgs = [
     "That’s completely okay 🤍",
@@ -93,8 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
       responseEl.textContent = noMsgs[noIndex++];
       return;
     }
-
-    // After all messages shown
     window.location.href = "html/no.html";
   });
 
