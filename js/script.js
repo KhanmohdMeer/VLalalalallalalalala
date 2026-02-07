@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ================================ */
   const UNLOCK_DATE = {
     year: 2026,
-    month: 1, // February (0 = Jan)
+    month: 1, // Feb (0 = Jan)
     day: 14
   };
 
@@ -24,11 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const gifBox     = document.getElementById("gifBox");
   const responseEl = document.getElementById("responseText");
 
-  // HARD SAFE STATE
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn  = document.getElementById("noBtn");
+
+  // HARD SAFE
   main.style.display = "none";
 
   /* ===============================
-     TYPEWRITER SETUP
+     TYPEWRITER
   ================================ */
   const fullHTML = msgEl.innerHTML;
   msgEl.innerHTML = "";
@@ -71,43 +74,39 @@ document.addEventListener("DOMContentLoaded", () => {
   ================================ */
   if (DEV_OVERRIDE) {
     unlock();
-    return;
-  }
-
-  /* ===============================
-     DATE LOCK (SAFE)
-  ================================ */
-  function todayDate() {
-    const n = new Date();
-    return new Date(n.getFullYear(), n.getMonth(), n.getDate());
-  }
-
-  const unlockDate = new Date(
-    UNLOCK_DATE.year,
-    UNLOCK_DATE.month,
-    UNLOCK_DATE.day
-  );
-
-  function updateLock() {
-    const today = todayDate();
-
-    if (today >= unlockDate) {
-      unlock();
-      return;
+  } else {
+    // DATE LOCK
+    function todayDate() {
+      const n = new Date();
+      return new Date(n.getFullYear(), n.getMonth(), n.getDate());
     }
 
-    const diffDays = Math.ceil(
-      (unlockDate - today) / 86400000
+    const unlockDate = new Date(
+      UNLOCK_DATE.year,
+      UNLOCK_DATE.month,
+      UNLOCK_DATE.day
     );
 
-    countdown.textContent = `${diffDays} day(s) to go 🤍`;
+    function updateLock() {
+      const today = todayDate();
+
+      if (today >= unlockDate) {
+        unlock();
+        return;
+      }
+
+      const diffDays = Math.ceil(
+        (unlockDate - today) / 86400000
+      );
+      countdown.textContent = `${diffDays} day(s) to go 🤍`;
+    }
+
+    setInterval(updateLock, 1000);
+    updateLock();
   }
 
-  setInterval(updateLock, 1000);
-  updateLock();
-
   /* ===============================
-     NO BUTTON (GLOBAL)
+     BUTTON LOGIC (MOBILE SAFE)
   ================================ */
   const noMsgs = [
     "That’s completely okay 🤍",
@@ -119,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let noIndex = 0;
 
-  window.handleNo = function () {
+  noBtn.addEventListener("click", () => {
     if (noIndex < noMsgs.length) {
       responseEl.textContent = noMsgs[noIndex++];
     }
@@ -127,13 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (noIndex >= noMsgs.length) {
       window.location.href = "html/no.html";
     }
-  };
+  });
 
-  /* ===============================
-     YES BUTTON (GLOBAL)
-  ================================ */
-  window.goYes = function () {
+  yesBtn.addEventListener("click", () => {
     window.location.href = "html/yes.html";
-  };
+  });
 
 });
