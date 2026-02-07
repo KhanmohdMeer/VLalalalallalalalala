@@ -66,3 +66,10 @@ p {
   border-radius: 14px;
   pointer-events: none;
 }
+.lock-screen {
+  pointer-events: auto;
+}
+
+body:not(.locked) .lock-screen {
+  pointer-events: none;
+}
