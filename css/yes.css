@@ -43,3 +43,54 @@ p.soft {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+/* ===============================
+   GIFT SECTION
+   ================================ */
+
+   .gifts{
+     display:flex;
+       flex-wrap:wrap;
+         justify-content:center;
+           gap:14px;
+             margin-top:28px;
+             }
+
+             .gift-btn{
+               padding:14px 22px;
+                 border:none;
+                   border-radius:16px;
+                     background:#ff4d6d;
+                       color:white;
+                         font-family:'Inter', sans-serif;
+                           font-size:0.95rem;
+                             cursor:pointer;
+                               transition:0.25s ease;
+                                 box-shadow:0 6px 14px rgba(0,0,0,0.15);
+                                 }
+
+                                 .gift-btn:hover{
+                                   transform:translateY(-2px) scale(1.05);
+                                   }
+
+                                   .gift-content{
+                                     display:none;
+                                       margin-top:24px;
+                                         padding:22px;
+                                           border-radius:18px;
+                                             background:rgba(255,255,255,0.65);
+                                               backdrop-filter:blur(6px);
+                                                 line-height:1.7;
+                                                   animation:fadeIn 0.45s ease;
+                                                   }
+
+                                                   .footer-note{
+                                                     margin-top:32px;
+                                                       font-size:0.85rem;
+                                                         opacity:0.7;
+                                                         }
+
+                                                         /* Fade animation */
+                                                         @keyframes fadeIn{
+                                                           from{opacity:0; transform:translateY(10px);}
+                                                             to{opacity:1; transform:translateY(0);}
+                                                             }

@@ -2,55 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Something From My Heart 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Something From My Heart 💖</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+        <!-- Fonts -->
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/valentine.css">
-</head>
+            <!-- CSS -->
+              <link rel="stylesheet" href="css/base.css">
+                <link rel="stylesheet" href="css/valentine.css">
 
-<body class="locked">
+                  <style>
+                      .buttons{
+                            margin-top:28px;
+                                  display:flex;
+                                        justify-content:center;
+                                              gap:14px;
+                                                    flex-wrap:wrap;
+                                                        }
 
-  <!-- 🔒 LOCK SCREEN -->
-  <div id="lockScreen" class="lock-screen">
-    <h1>Not yet, Sunshine 💖</h1>
-    <p>Something special is waiting</p>
-    <div id="countdown"></div>
-  </div>
+                                                            .buttons button{
+                                                                  padding:14px 26px;
+                                                                        border:none;
+                                                                              border-radius:16px;
+                                                                                    font-family:'Inter',sans-serif;
+                                                                                          font-size:1rem;
+                                                                                                cursor:pointer;
+                                                                                                      transition:0.25s ease;
+                                                                                                            box-shadow:0 6px 14px rgba(0,0,0,0.15);
+                                                                                                                }
 
-  <!-- ❤️ CONTENT -->
-  <div id="mainContent" class="container">
-    <h1>Hey… I wanted to tell you something 🌹</h1>
+                                                                                                                    .yes{
+                                                                                                                          background:#ff4d6d;
+                                                                                                                                color:white;
+                                                                                                                                    }
 
-    <p class="message" id="typeMessage">
-      I don’t want this to feel heavy or awkward,<br><br>
-      Somewhere along the way, you became someone
-      I genuinely care about — not because of big moments,
-      but because of the small ones that quietly stayed with me.<br><br>
-      This isn’t me asking you to decide anything.
-      It’s just me choosing to be honest
-      and letting you know that you matter to me.<br><br>
-      Whatever you choose after this,
-      I’ll respect it — completely.
-    </p>
+                                                                                                                                        .no{
+                                                                                                                                              background:#e0e0e0;
+                                                                                                                                                    color:#444;
+                                                                                                                                                        }
 
-    <div class="gif-box" id="gifBox">
-      <img src="assets/start.gif" alt="🤍">
-    </div>
+                                                                                                                                                            .buttons button:hover{
+                                                                                                                                                                  transform:scale(1.07);
+                                                                                                                                                                      }
 
-    <div class="buttons">
-  <button class="yes" id="yesBtn">Yes 💖</button>
-  <button class="no" id="noBtn">No 💔</button>
-</div>
+                                                                                                                                                                          .buttons button:active{
+                                                                                                                                                                                transform:scale(0.96);
+                                                                                                                                                                                    }
+                                                                                                                                                                                      </style>
+                                                                                                                                                                                      </head>
 
-    <p class="response" id="responseText"></p>
-  </div>
+                                                                                                                                                                                      <body>
 
-  <!-- JS -->
-  <script src="js/script.js?v=FINAL"></script>
-</body>
-</html>
+                                                                                                                                                                                        <div id="mainContent" class="container">
+
+                                                                                                                                                                                            <h1>Hey… I wanted to tell you something 🌹</h1>
+
+                                                                                                                                                                                                <p class="message">
+                                                                                                                                                                                                      I don’t want this to feel heavy or awkward,<br><br>
+                                                                                                                                                                                                            Somewhere along the way, you became someone
+                                                                                                                                                                                                                  I genuinely care about — not because of big moments,
+                                                                                                                                                                                                                        but because of the small ones that quietly stayed with me.<br><br>
+                                                                                                                                                                                                                              This isn’t me asking you to decide anything.
+                                                                                                                                                                                                                                    It’s just me choosing to be honest
+                                                                                                                                                                                                                                          and letting you know that you matter to me.<br><br>
+                                                                                                                                                                                                                                                Whatever you choose after this,
+                                                                                                                                                                                                                                                      I’ll respect it — completely.
+                                                                                                                                                                                                                                                          </p>
+
+                                                                                                                                                                                                                                                              <div class="gif-box">
+                                                                                                                                                                                                                                                                    <img src="assets/start.gif" alt="🤍">
+                                                                                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                                                                                            <div class="buttons">
+                                                                                                                                                                                                                                                                                  <button class="yes" id="yesBtn">Yes 💖</button>
+                                                                                                                                                                                                                                                                                        <button class="no" id="noBtn">No 💔</button>
+                                                                                                                                                                                                                                                                                            </div>
+
+                                                                                                                                                                                                                                                                                                <p class="response" id="responseText"></p>
+                                                                                                                                                                                                                                                                                                  </div>
+
+                                                                                                                                                                                                                                                                                                    <script>
+                                                                                                                                                                                                                                                                                                        document.getElementById("yesBtn").onclick = () => {
+                                                                                                                                                                                                                                                                                                              window.location.href = "html/yes.html";
+                                                                                                                                                                                                                                                                                                                  };
+
+                                                                                                                                                                                                                                                                                                                      document.getElementById("noBtn").onclick = () => {
+                                                                                                                                                                                                                                                                                                                            window.location.href = "html/no.html";
+                                                                                                                                                                                                                                                                                                                                };
+                                                                                                                                                                                                                                                                                                                                  </script>
+
+                                                                                                                                                                                                                                                                                                                                    <!-- Keep if you still use other effects inside script.js -->
+                                                                                                                                                                                                                                                                                                                                      <script src="js/script.js?v=FINAL"></script>
+
+                                                                                                                                                                                                                                                                                                                                      </body>
+                                                                                                                                                                                                                                                                                                                                      </html>
